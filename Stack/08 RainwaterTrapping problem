@@ -1,0 +1,16 @@
+class Solution {
+public:
+    int trap(vector<int>& a) {
+        int i, res = 0;
+        int n = a.size();
+        if(!n) return res;
+        vector<int> ltr(n, 0), rtl(n, 0);
+        for(i = 1, ltr[0] = a[0]; i < n; i++)
+            ltr[i] = max(ltr[i-1], a[i]);
+        for(i = n - 2, rtl[n-1] = a[n-1]; i >= 0; i--)
+            rtl[i] = max(rtl[i+1], a[i]);
+        for(i = 0; i < n; i++)
+            res += min(ltr[i], rtl[i]) - a[i];
+        return res;
+    }
+};
